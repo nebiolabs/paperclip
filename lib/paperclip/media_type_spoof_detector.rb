@@ -7,7 +7,11 @@ module Paperclip
     def initialize(file, name, content_type)
       @file = file
       @name = name
-      @content_type = content_type || ""
+      if content_type && content_type.is_a?(String)
+        @content_type = content_type
+      else
+        @content_type = ""
+      end
     end
 
     def spoofed?
