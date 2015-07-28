@@ -41,8 +41,21 @@ module Paperclip
       supplied_media_type.present? && !media_types_from_name.include?(supplied_media_type)
     end
 
+    def supplied_type_mismatch?
+      if media_types_from_name.size == 0
+        false
+      else
+        supplied_media_type.present? && !media_types_from_name.include?(supplied_media_type)
+      end
+
+    end
+
     def calculated_type_mismatch?
-      !media_types_from_name.include?(calculated_media_type)
+      if media_types_from_name.size == 0
+        false #cannot mismatch if there are media types from name
+      else
+        !media_types_from_name.include?(calculated_media_type)
+      end
     end
 
     def mapping_override_mismatch?
